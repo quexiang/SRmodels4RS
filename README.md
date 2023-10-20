@@ -20,7 +20,6 @@ https://github.com/zhoumumu/VapSR
 
 ## Installation
 Referring to [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN), we need to perform the following installation:
-    
     ```bash
     pip install basicsr
     pip install -r requirements.txt
