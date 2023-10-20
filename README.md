@@ -52,7 +52,7 @@ The original code mainly for images in jpg and png formats. This project targets
 
 2. Run `data_generate.py` to slice images with an edge overlap rate of 10%. Note: HR and LR images are cropped at the same time and at the same position. You will get data sets numbered according to the cropping order, which are stored in floders `datasets/TIF/NIRRGB/HR` and `datasets/TIF/NIRRGB/LR`, respectively.
 
-# Training
+# Train, Test, Inference
 ## Prepare txt files for meta information
 1. You need to use the `datapre/train_test_val.py` to divide the index of training, testing and validation sets according to 8:1:1, and generate txt files.
 2. You can use `datapre/train_test_val_metainfo.py` to generate meta_info.txt for each set. The following are some examples in meta_info_train.txt in Windows System.
@@ -67,7 +67,7 @@ The original code mainly for images in jpg and png formats. This project targets
     HR/1455.tif, LR/1455.tif
     ```
 
-## Train model
+## Training
 1. Modify the content in the option file options/train/RealESRGAN/train_realesrgan_x4plus.yml accordingly:
     ```bash
     train:
@@ -142,3 +142,9 @@ After the training of Real-ESRNet, you now have the file `experiments/train_Real
 3. The formal testing:
     ```bash
 	python test.py -opt options/test/SwinIR/test_SwinIR_SRx4_scratch.yml
+
+# Public Mangrove Datasat
+To evaluate the effectiveness of the proposed workflow in mangrove extraction, we selected two publicly available datasets of mangroves from 2019, both with a spatial resolution of 10m.
+
+- Global Mangrove Watch of 2019 (GMW2019). This dataset can be downloaded in (https://www.scidb.cn/en/detail?dataSetId=22b29bf879354343ba4d8d23ea0c6c66)
+- The mangrove map of China for 2019 (MC2019). This dataset can be downloaded in (https://www.scidb.cn/en/detail?dataSetId=765862389328379904)
