@@ -49,9 +49,9 @@ The original code mainly for images in jpg and png formats. This project targets
 
 # Data preprocessing
 
-1. You can use `PercentClip.py` to calculate the most appropriate parameter of percentage truncation, and then convert the 16uint tif images into an 8uint.
+1. You can use `datapre/PercentClip.py` to calculate the most appropriate parameter of percentage truncation, and then convert the 16uint tif images into an 8uint.
 
-2. Run `data_generate.py` to slice images with an edge overlap rate of 10%. Note: HR and LR images are cropped at the same time and at the same position. You will get data sets numbered according to the cropping order, which are stored in floders `datasets/TIF/NIRRGB/HR` and `datasets/TIF/NIRRGB/LR`, respectively.
+2. Run `datapre/data_generate.py` to slice images with an edge overlap rate of 10%. Note: HR and LR images are cropped at the same time and at the same position. You will get data sets numbered according to the cropping order, which are stored in floders `datasets/TIF/NIRRGB/HR` and `datasets/TIF/NIRRGB/LR`, respectively.
 
 # Train, Test, Inference
 ## Prepare txt files for meta information
