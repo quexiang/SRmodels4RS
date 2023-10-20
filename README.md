@@ -56,7 +56,7 @@ The original code mainly for images in jpg and png formats. This project targets
 # Train, Test, Inference
 ## Prepare txt files for meta information
 1. You need to use the `datapre/train_test_val.py` to divide the index of training, testing and validation sets according to 8:1:1, and generate txt files.
-2. You can use `datapre/train_test_val_metainfo.py` to generate meta_info.txt for each set. The following are some examples in meta_info_train.txt in Windows System.
+2. You can use `datapre/train_test_val_metainfo.py` to generate meta_info.txt for each set. The following are some examples in `meta_info_train.txt` in Windows System.
     ```bash
     HR/1095.tif, LR/1095.tif
     HR/290.tif, LR/290.tif
