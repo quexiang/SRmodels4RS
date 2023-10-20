@@ -1,0 +1,108 @@
+# general settings
+# python basicsr/train.py -opt options/train/VapSR/VapSR_X4.yml
+name: VapSR_X4_augment_20k
+model_type: SRModel
+scale: 4
+num_gpu: 1
+manual_seed: 0
+
+# dataset and data loader settings
+datasets:
+  train:
+    name: TIF
+    type: RealESRGANPairedDataset_hy
+    dataroot_gt: F:\ESRGAN\datasets\TIF\NIRRGB
+    dataroot_lq: F:\ESRGAN\datasets\TIF\NIRRGB
+    meta_info: F:\ESRGAN\datasets\TIF\NIRRGB\meta_info_train1.txt
+    io_backend:
+      type: disk
+
+    gt_size: 256
+    use_hflip: true
+    use_rot: true
+
+    # data loader
+    use_shuffle: true
+    num_worker_per_gpu: 6
+    batch_size_per_gpu: 12
+    dataset_enlarge_ratio: 100
+    prefetch_mode: ~
+
+  val:
+    name: TIF
+    type: RealESRGANPairedDataset_hy
+    dataroot_gt: F:\ESRGAN\datasets\TIF\NIRRGB
+    dataroot_lq: F:\ESRGAN\datasets\TIF\NIRRGB
+    meta_info: F:\ESRGAN\datasets\TIF\NIRRGB\meta_info_val.txt
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+  type: vapsr
+  num_in_ch: 4
+  num_feat: 48
+  d_atten: 64
+  num_block: 21
+  num_out_ch: 4
+  scale: 4
+
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0.999
+  optim_g:
+    type: Adam
+    lr: !!float 1e-3
+    weight_decay: 0
+    betas: [0.9, 0.99]
+    momentum: ~
+
+  scheduler:
+    type: MultiStepLR
+    milestones: [200000]
+    gamma: 0.5
+
+  total_iter: 200000
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+
+# validation settings
+val:
+  val_freq: !!float 1e3
+  save_img: false
+
+  metrics:
+    psnr: # metric name
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: false
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 5e3
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+    entity: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29501
