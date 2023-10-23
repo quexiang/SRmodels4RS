@@ -4,69 +4,19 @@ We train deep learning (DL-) based super-resolution (SR) models based on the pai
 
 In order to run the code, you need to do the following configuration:
 
-1. Configure the environment according to [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN).
+1. For the Dependencies and Installation, see from [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN).
 2. Download the code in `SRmodels4RS` project to replace and modify some scripts in Real-ESRGAN:
 - Use `Src/basicsr/data/realesrgan_paired_dataset.py` to replace `basicsr/data/realesrgan_paired_dataset.py` in Real-ESRGAN project.
 - Use `Src/basicsr/utils/img_util.py` to replace `basicsr/utils/img_util.py` in Real-ESRGAN project.
 - Use `Src/basicsr/train.py` and `Src/basicsr/test.py` to replace `basicsr/train.py` and `basicsr/test.py` in Real-ESRGAN project, respectively. 
 - Add all the scripts in `Src/inference`,`Src/options/test` and `Src/options/train` to the same folders `inference`,`options/test` and `options/train` in Real-ESRGAN project.
 - Add `Src/basicsr/archs/vaspr_arch.py` to `basicsr/archs/` in Real-ESRGAN project.
-
-# Dependencies and Installation
-
-## Dependencies
-- Python 3.7
-- Pytorch 1.13.1
-
-## Installation
-Referring to [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN), we need to perform the following installation:
+3. Install a package that  supports reading tif images:
     ```bash
-    pip install basicsr
-    pip install -r requirements.txt
-    python setup.py develop
     pip install gdal
     ```
-# Code modification
-
-The original code mainly for images in jpg and png formats. This project targets images in tif foramt, so available modules are added to the original code:
-
-1. Add class `RealESRGANPairedDataset_hy` in `basicsr/data/realesrgan_paired_dataset.py`. There is part of this class:
-    ```bash
-    gt_path = self.paths[index]['gt_path']
-    img_gt = readtif(gt_path)
-    img_gt = img_gt.astype(np.float32) / maxvalue_gt
-    lq_path = self.paths[index]['lq_path']
-    img_lq = readtif(lq_path)
-    img_lq = img_lq.astype(np.float32) / maxvalue_lq
-    ```
-`maxvalue_gt` and `maxvalue_lq` correspond to the maximum values after percentage truncation of High-resolution (HR) images and Low-resolution (LR) images, respectively. You need to modify them according to your own database.
-
-2. Add function `readtif` in `basicsr/utils/img_util.py`, which is used to real the tif image.
-
-3. Add function `writeTiff` and `imwrite` to all codes in the floder `inference` to save the inference results as .tif images.
-
-4. `basicsr/archs` lacks of structure of VapSR, refer to [VapSR](https://github.com/zhoumumu/VapSR) to create `vaspr_arch.py`.
-
-# Data preprocessing
-
-1. You can use `datapre/PercentClip.py` to calculate the most appropriate parameter of percentage truncation, and then convert the 16uint tif images into an 8uint.
-
-2. Run `datapre/data_generate.py` to slice images with an edge overlap rate of 10%. Note: HR and LR images are cropped at the same time and at the same position. You will get data sets numbered according to the cropping order, which are stored in floders `datasets/TIF/NIRRGB/HR` and `datasets/TIF/NIRRGB/LR`, respectively.
 
 # Train, Test, Inference
-## Prepare txt files for meta information
-1. You need to use the `datapre/train_test_val.py` to divide the index of training, testing and validation sets according to 8:1:1, and generate txt files.
-2. You can use `datapre/train_test_val_metainfo.py` to generate meta_info.txt for each set. The following are some examples in `meta_info_train.txt` in Windows System.
-    ```bash
-    HR/1095.tif, LR/1095.tif
-    HR/290.tif, LR/290.tif
-    HR/389.tif, LR/389.tif
-    HR/113.tif, LR/113.tif
-    HR/1231.tif, LR/1231.tif
-    HR/403.tif, LR/403.tif
-    HR/284.tif, LR/284.tif
-    HR/1455.tif, LR/1455.tif
-    ```
 
 ## Training
 1. Modify the content in the option file options/train/RealESRGAN/train_realesrgan_x4plus.yml accordingly:
