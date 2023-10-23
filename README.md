@@ -5,28 +5,28 @@ We train deep learning (DL-) based super-resolution (SR) models based on the pai
 In order to run the code, you need to do the following configuration:
 
 1. For the Dependencies and Installation, see from [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN).
-2. Download the code in `SRmodels4RS` project to replace and modify some scripts in Real-ESRGAN:
+2. Install a package that  supports reading tif images:
+    ```bash
+    pip install gdal
+    ```
+3. Download the code in `SRmodels4RS` project to replace and modify some scripts in Real-ESRGAN:
 - Use `Src/basicsr/data/realesrgan_paired_dataset.py` to replace `basicsr/data/realesrgan_paired_dataset.py` in Real-ESRGAN project.
 - Use `Src/basicsr/utils/img_util.py` to replace `basicsr/utils/img_util.py` in Real-ESRGAN project.
 - Use `Src/basicsr/train.py` and `Src/basicsr/test.py` to replace `basicsr/train.py` and `basicsr/test.py` in Real-ESRGAN project, respectively. 
 - Add all the scripts in `Src/inference`,`Src/options/test` and `Src/options/train` to the same folders `inference`,`options/test` and `options/train` in Real-ESRGAN project.
 - Add `Src/basicsr/archs/vaspr_arch.py` to `basicsr/archs/` in Real-ESRGAN project.
-3. Install a package that  supports reading tif images:
-    ```bash
-    pip install gdal
-    ```
+- Download pre-trained models in `Src/experiments/train_SwinIR_SRx4_NIRRGB/models/net_g_latest.pth.py` into `experiments/train_SwinIR_SRx4_NIRRGB/models` in Real-ESRGAN project.
 
 # Train, Test, Inference
-
 ## Training
-1. Modify the content in the option file options/train/RealESRGAN/train_realesrgan_x4plus.yml accordingly:
+1. Modify the content in the option file `options/train/RealESRGAN/train_realesrgan_x4plus.yml` accordingly:
     ```bash
     train:
         name: TIF
         type: RealESRGANPairedDataset_hy
-        dataroot_gt: datasets/TIF/NIRRGB
-        dataroot_lq: datasets/TIF/NIRRGB
-        meta_info: datasets/TIF/NIRRGB/meta_info_train.txt
+        dataroot_gt:  Data/Mangroves/Paired_H_L_images
+        dataroot_lq:  Data/Mangroves/Paired_H_L_images
+        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_train.txt
         io_backend:
             type: disk
     ```
@@ -35,15 +35,15 @@ In order to run the code, you need to do the following configuration:
     val:
         name: TIF
         type: RealESRGANPairedDataset_hy
-        dataroot_gt: datasets/TIF/NIRRGB
-        dataroot_lq: datasets/TIF/NIRRGB
-        meta_info: datasets/TIF/NIRRGB/meta_info_val.txt
+        dataroot_gt: Data/Mangroves/Paired_H_L_images
+        dataroot_lq: Data/Mangroves/Paired_H_L_images
+        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_val.txt
         io_backend:
             type: disk
     ```
 3. The formal training:
     ```bash
-	python train.py -opt options/train/RealESRGAN/train_realesrgan_x4plus.yml
+	python basicsr/train.py -opt options/train/RealESRGAN/train_realesrgan_x4plus.yml
     ```
 After the training of Real-ESRNet, you now have the file `experiments/train_RealESRNetx4plus_1000k/model/net_g_1000000.pth`. If you need to specify the pre-trained path to other files, modify the `pretrain_network_g` value in the option file `train_realesrgan_x4plus.yml`.
 
@@ -53,9 +53,9 @@ After the training of Real-ESRNet, you now have the file `experiments/train_Real
     test:
         name: TIF
         type: RealESRGANPairedDataset_hy
-        dataroot_gt: datasets/TIF/NIRRGB
-        dataroot_lq: datasets/TIF/NIRRGB
-        meta_info: datasets/TIF/NIRRGB/meta_info_test.txt
+        dataroot_gt: Data/Mangroves/Paired_H_L_images
+        dataroot_lq: Data/Mangroves/Paired_H_L_images
+        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_test.txt
         io_backend:
             type: disk
     ```
@@ -77,9 +77,9 @@ After the training of Real-ESRNet, you now have the file `experiments/train_Real
     test:
         name: TIF
         type: RealESRGANPairedDataset_hy
-        dataroot_gt: datasets/TIF/NIRRGB
-        dataroot_lq: datasets/TIF/NIRRGB
-        meta_info: datasets/TIF/NIRRGB/meta_info_test.txt
+        dataroot_gt: Data/Mangroves/Paired_H_L_images
+        dataroot_lq: Data/Mangroves/Paired_H_L_images
+        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_test.txt
         io_backend:
             type: disk
     ```
