@@ -1,16 +1,16 @@
 # SRmodels4RS
- 
-# Background
+
 We train deep learning (DL-) based super-resolution (SR) models based on the paired images of GF-1 and Landsat-8, making them suitable for image restoration of actual mangrove scenes.
 
-The code construction of training, testing, inference process based on:
-https://github.com/xinntao/Real-ESRGAN
-https://github.com/xinntao/BasicSR
+In order to run the code, you need to do the following configuration:
 
-The code of GAN-based models and attention-based models is based on:
-https://github.com/xinntao/Real-ESRGAN
-https://github.com/zhoumumu/VapSR
-
+1. Configure the environment according to [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN).
+2. Download the code in `SRmodels4RS` project to replace and modify some scripts in Real-ESRGAN:
+- Use `Src/basicsr/data/realesrgan_paired_dataset.py` to replace `basicsr/data/realesrgan_paired_dataset.py` in Real-ESRGAN project.
+- Use `Src/basicsr/utils/img_util.py` to replace `basicsr/utils/img_util.py` in Real-ESRGAN project.
+- Use `Src/basicsr/train.py` and `Src/basicsr/test.py` to replace `basicsr/train.py` and `basicsr/test.py` in Real-ESRGAN project, respectively. 
+- Add all the scripts in `Src/inference`,`Src/options/test` and `Src/options/train` to the same folders `inference`,`options/test` and `options/train` in Real-ESRGAN project.
+- Add `Src/basicsr/archs/vaspr_arch.py` to `basicsr/archs/` in Real-ESRGAN project.
 
 # Dependencies and Installation
 
