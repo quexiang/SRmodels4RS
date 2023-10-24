@@ -17,9 +17,9 @@ datasets:
   train:
     name: TIF
     type: RealESRGANPairedDataset_hy
-    dataroot_gt: F:\ESRGAN\datasets\TIF\NIRRGB
-    dataroot_lq: F:\ESRGAN\datasets\TIF\NIRRGB
-    meta_info: F:\ESRGAN\datasets\TIF\NIRRGB\meta_info_train1.txt
+    dataroot_gt:  Data/Mangroves/Paired_H_L_images
+    dataroot_lq:  Data/Mangroves/Paired_H_L_images
+    meta_info: Data/Mangroves/Paired_H_L_images/meta_info_train.txt
     io_backend:
       type: disk
 
@@ -39,9 +39,9 @@ datasets:
   val:
     name: TIF
     type: RealESRGANPairedDataset_hy
-    dataroot_gt: F:\ESRGAN\datasets\TIF\NIRRGB
-    dataroot_lq: F:\ESRGAN\datasets\TIF\NIRRGB
-    meta_info: F:\ESRGAN\datasets\TIF\NIRRGB\meta_info_val.txt
+    dataroot_gt:  Data/Mangroves/Paired_H_L_images
+    dataroot_lq:  Data/Mangroves/Paired_H_L_images
+    meta_info: Data/Mangroves/Paired_H_L_images/meta_info_val.txt
     io_backend:
       type: disk
 
