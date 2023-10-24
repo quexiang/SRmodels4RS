@@ -4,7 +4,7 @@ We train deep learning (DL-) based super-resolution (SR) models based on the pai
 
 In order to run the code, you need to do the following configuration:
 
-1. For the Dependencies and Installation, see from [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN).
+1. For the Dependencies and Installation, see from [Real-ESRGAN v0.3.0](https://github.com/xinntao/Real-ESRGAN).
 2. Install a package that  supports reading tif images:
     ```bash
     pip install gdal
