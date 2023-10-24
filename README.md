@@ -19,7 +19,7 @@ In order to run the code, you need to do the following configuration:
 
 # Train, Test, Inference
 ## Training
-1. Modify the content in the option file `options/train/RealESRGAN/train_realesrgan_x4plus.yml` accordingly:
+1. Modify the content in the option file `options/train/SwinIR/train_SwinIR_SRx4_scratch.yml` accordingly:
     ```bash
     train:
         name: TIF
