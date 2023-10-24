@@ -17,82 +17,25 @@ In order to run the code, you need to do the following configuration:
 - Add `Src/basicsr/archs/vaspr_arch.py` to `basicsr/archs/` in Real-ESRGAN project.
 - Download pre-trained models in `Src/experiments/train_SwinIR_SRx4_NIRRGB/models/net_g_latest.pth.py` into `experiments/train_SwinIR_SRx4_NIRRGB/models` in Real-ESRGAN project.
 
-# Train, Test, Inference
-## Training
-1. Modify the content in the option file `options/train/SwinIR/train_SwinIR_SRx4_scratch.yml` accordingly:
-    ```bash
-    train:
-        name: TIF
-        type: RealESRGANPairedDataset_hy
-        dataroot_gt:  Data/Mangroves/Paired_H_L_images
-        dataroot_lq:  Data/Mangroves/Paired_H_L_images
-        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_train.txt
-        io_backend:
-            type: disk
-    ```
-2. If you want to perform validation during training, uncomment those lines and modify accordingly:
-    ```bash
-    val:
-        name: TIF
-        type: RealESRGANPairedDataset_hy
-        dataroot_gt: Data/Mangroves/Paired_H_L_images
-        dataroot_lq: Data/Mangroves/Paired_H_L_images
-        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_val.txt
-        io_backend:
-            type: disk
-    ```
-3. The formal training:
+# Useage
+1. You can run the code to realize the formal training. For example:
     ```bash
 	python basicsr/train.py -opt options/train/RealESRGAN/train_realesrgan_x4plus.yml
     ```
-After the training of Real-ESRNet, you now have the file `experiments/train_RealESRNetx4plus_1000k/model/net_g_1000000.pth`. If you need to specify the pre-trained path to other files, modify the `pretrain_network_g` value in the option file `train_realesrgan_x4plus.yml`.
+After the training, you now have the file `experiments/train_RealESRNetx4plus_1000k/model/net_g_lasted.pth`. If you need to specify the pre-trained path to other files, modify the `pretrain_network_g` value in the option file `train_realesrgan_x4plus.yml`.
 
-## Testing
-1. Modify the content in the option file options/test/SwinIR/test_SwinIR_SRx4_scratch.yml accordingly:
-    ```bash
-    test:
-        name: TIF
-        type: RealESRGANPairedDataset_hy
-        dataroot_gt: Data/Mangroves/Paired_H_L_images
-        dataroot_lq: Data/Mangroves/Paired_H_L_images
-        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_test.txt
-        io_backend:
-            type: disk
-    ```
-2. Modify the `pretrain_network_g` value:
-    ```bash
-    path:
-        pretrain_network_g: 'experiments/train_SwinIR_SRx4_NIRRGB/models/net_g_latest.pth'
-        strict_load_g: true
-        resume_state: ~
-    ```
-3. The formal testing:
-    ```bash
-	python test.py -opt options/test/SwinIR/test_SwinIR_SRx4_scratch.yml
-    ```
+2. Both testing and inference processes require pre-trained weights. You can load the pre-trained models obtained by training with the path`pretrain_network_g` in the option file.
 
-## Inference
-1. Modify the content in the option file options/test/SwinIR/test_SwinIR_SRx4_scratch.yml accordingly:
+3. You can run the code to realize the formal testing. For example:
     ```bash
-    test:
-        name: TIF
-        type: RealESRGANPairedDataset_hy
-        dataroot_gt: Data/Mangroves/Paired_H_L_images
-        dataroot_lq: Data/Mangroves/Paired_H_L_images
-        meta_info: Data/Mangroves/Paired_H_L_images/meta_info_test.txt
-        io_backend:
-            type: disk
+	python test.py -opt options/test/Real-ESRGAN/test_realesrgan_paired_dataset.yml
     ```
-2. Modify the `pretrain_network_g` value:
+4. You can run the code to realize the formal inference. For example:
     ```bash
-    path:
-        pretrain_network_g: 'experiments/train_SwinIR_SRx4_NIRRGB/models/net_g_latest.pth'
-        strict_load_g: true
-        resume_state: ~
+	python inference/inference_realesrgan.py
     ```
-3. The formal testing:
-    ```bash
-	python test.py -opt options/test/SwinIR/test_SwinIR_SRx4_scratch.yml
+5. If use your own dataset, you should modify the option file.
+
 
 # Public Mangrove Datasat
 To evaluate the effectiveness of the proposed workflow in mangrove extraction, we selected two publicly available datasets of mangroves from 2019, both with a spatial resolution of 10m.
