@@ -12,9 +12,9 @@ datasets:
   test:
     name: TIF
     type: RealESRGANPairedDataset_hy
-    dataroot_gt: F:\ESRGAN\datasets\TIF\NIRRGB
-    dataroot_lq: F:\ESRGAN\datasets\TIF\NIRRGB
-    meta_info: F:\ESRGAN\datasets\TIF\NIRRGB\meta_inRfo_test.txt
+    dataroot_gt:  Data/Mangroves/Paired_H_L_images
+    dataroot_lq:  Data/Mangroves/Paired_H_L_images
+    meta_info: Data/Mangroves/Paired_H_L_images/meta_info_test.txt
     io_backend:
       type: disk
 
@@ -28,7 +28,7 @@ network_g:
 
 # path
 path:
-  pretrain_network_g: F:\ESRGAN\basicsr-master\experiments\train_RealESRGANx4plus_NIRRGB_agument_20k\models\net_g_latest.pth
+  pretrain_network_g: experiments/train_RealESRGANx4plus_NIRRGB_agument_20k/models/net_g_latest.pth
   strict_load_g: true
 
 # validation settings
