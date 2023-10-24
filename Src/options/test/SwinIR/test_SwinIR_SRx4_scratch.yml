@@ -35,7 +35,7 @@ network_g:
 
 # path
 path:
-  pretrain_network_g: 'F:/ESRGAN/basicsr-master/experiments/train_SwinIR_SRx4_NIRRGB_augment_20k/models/net_g_latest.pth'
+  pretrain_network_g: 'experiments/train_SwinIR_SRx4_NIRRGB_augment_20k/models/net_g_latest.pth'
   strict_load_g: true
   resume_state: ~
 
