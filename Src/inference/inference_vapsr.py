@@ -57,7 +57,7 @@ def main():
         '--model_path',
         type=str,
         default=  # noqa: E251
-        'F:/ESRGAN/basicsr-master/experiments/VapSR_X4_augment_20k/models/net_g_latest.pth'  # noqa: E501
+        'experiments/train_VapSR_X4_NIRRGB/models/net_g_latest.pth'  # noqa: E501
     )
     parser.add_argument('--input', type=str, default='Data/Mangroves/Paired_H_L_images/LH', help='input test image folder')
     parser.add_argument('--output', type=str, default='Data/Mangroves/inference/output', help='output folder')
