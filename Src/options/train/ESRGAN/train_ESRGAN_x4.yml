@@ -55,7 +55,7 @@ network_d:
 
 # path
 path:
-  #pretrain_network_g: experiments/RRDBNet_x4/models/net_g_1000000.pth
+  pretrain_network_g: experiments/RRDBNet_x4/models/net_g_1000000.pth
   param_key_g: params_ema
   strict_load_g: true
   resume_state: ~
