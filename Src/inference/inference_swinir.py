@@ -55,8 +55,8 @@ def imwrite(img, file_path, im_geotrans,im_proj):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input', type=str, default='F:/ESRGAN/datasets/test/input', help='input test image folder')
-    parser.add_argument('--output', type=str, default='F:/ESRGAN/datasets/inference/output_255', help='output folder')
+    parser.add_argument('--input', type=str, default='Data/Mangroves/Paired_H_L_images/LH', help='input test image folder')
+    parser.add_argument('--output', type=str, default='Data/Mangroves/inference/output', help='output folder')
     parser.add_argument(
         '--task',
         type=str,
@@ -72,7 +72,7 @@ def main():
     parser.add_argument(
         '--model_path',
         type=str,
-        default='F:/ESRGAN/basicsr-master/experiments/train_SwinIR_SRx4_NIRRGB_augment_20k/models/net_g_latest.pth')
+        default='experiments/train_SwinIR_SRx4_NIRRGB/models/net_g_latest.pth')
     args = parser.parse_args()
 
     os.makedirs(args.output, exist_ok=True)
@@ -87,7 +87,7 @@ def main():
     else:
         window_size = 8
 
-    imgname = 'LC08_ROI_QZW_unit8'
+    imgname = '1'
     path = args.input + '/' + imgname + '.tif'
 
     print('PATH', path)
@@ -95,7 +95,7 @@ def main():
         # read image
     img = gdal.Open(path)
 
-    GF = gdal.Open('I:/redo/0427ROI/GF1C_ROI_QZW.tif')
+    GF = gdal.Open('Data/Mangroves/Paired_H_L_images/HR/1.tif')
     im_geotrans = GF.GetGeoTransform()
     im_proj = GF.GetProjection() 
 
