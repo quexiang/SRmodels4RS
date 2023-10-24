@@ -16,9 +16,9 @@ datasets:
   train:
     name: TIF
     type: RealESRGANPairedDataset_hy
-    dataroot_gt: F:\ESRGAN\datasets\TIF\NIRRGB
-    dataroot_lq: F:\ESRGAN\datasets\TIF\NIRRGB
-    meta_info: F:\ESRGAN\datasets\TIF\NIRRGB\meta_info_train1.txt
+    dataroot_gt: Data/Mangroves/Paired_H_L_images
+    dataroot_lq: Data/Mangroves/Paired_H_L_images
+    meta_info: Data/Mangroves/Paired_H_L_images/meta_info_train.txt
     io_backend:
       type: disk
 
@@ -36,9 +36,9 @@ datasets:
   val:
     name: TIF
     type: RealESRGANPairedDataset_hy
-    dataroot_gt: F:\ESRGAN\datasets\TIF\NIRRGB
-    dataroot_lq: F:\ESRGAN\datasets\TIF\NIRRGB
-    meta_info: F:\ESRGAN\datasets\TIF\NIRRGB\meta_info_val.txt
+    dataroot_gt: Data/Mangroves/Paired_H_L_images
+    dataroot_lq: Data/Mangroves/Paired_H_L_images
+    meta_info: Data/Mangroves/Paired_H_L_images/meta_info_val.txt
     io_backend:
       type: disk
 
@@ -61,7 +61,7 @@ network_d:
 path:
   # use the pre-trained Real-ESRNet model
 
-  pretrain_network_g: F:\ESRGAN\basicsr-master\experiments\train_RealESRNetx4plus_NIRRGB_agument\models\net_g_latest.pth
+  pretrain_network_g: experiments/train_RealESRNetx4plus_NIRRGB/models/net_g_latest.pth
   param_key_g: params_ema
   strict_load_g: true
   pretrain_network_d: ~
