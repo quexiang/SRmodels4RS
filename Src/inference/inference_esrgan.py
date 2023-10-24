@@ -11,7 +11,7 @@ import gdal
 from basicsr.archs.rrdbnet_arch import RRDBNet
 
 
-#  保存tif文件函数
+#  Save TIF image
 def writeTiff(im_data, path,im_geotrans,im_proj):
     if 'int8' in im_data.dtype.name:
         datatype = gdal.GDT_Byte
@@ -20,12 +20,12 @@ def writeTiff(im_data, path,im_geotrans,im_proj):
     else:
         datatype = gdal.GDT_Float32
     im_bands, im_height, im_width = im_data.shape
-    # 创建文件
+    # Create tif
     driver = gdal.GetDriverByName("GTiff")
     dataset = driver.Create(path, int(im_width), int(im_height), int(im_bands), datatype)
     if (dataset != None):
-        dataset.SetGeoTransform(im_geotrans)  # 写入仿射变换参数
-        dataset.SetProjection(im_proj)  # 写入投影
+        dataset.SetGeoTransform(im_geotrans) 
+        dataset.SetProjection(im_proj) 
     for i in range(im_bands):
         dataset.GetRasterBand(i + 1).WriteArray(im_data[i])
     del dataset
@@ -57,10 +57,10 @@ def main():
         '--model_path',
         type=str,
         default=  # noqa: E251
-        'F:/ESRGAN/basicsr-master/experiments/052_ESRGAN_x4_NIRRGB_4_2085/models/net_g_latest.pth'  # noqa: E501
+        'experiments/train_ESRGAN_x4_NIRRGB/models/net_g_latest.pth'  # noqa: E501
     )
-    parser.add_argument('--input', type=str, default='F:/ESRGAN/datasets/test/input', help='input test image folder')
-    parser.add_argument('--output', type=str, default='F:/ESRGAN/datasets/inference/output_255', help='output folder')
+    parser.add_argument('--input', type=str, default='Data/Mangroves/Paired_H_L_images/LH', help='input test image folder')
+    parser.add_argument('--output', type=str, default='Data/Mangroves/inference/output', help='output folder')
     args = parser.parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -71,7 +71,7 @@ def main():
     model = model.to(device)
 
     os.makedirs(args.output, exist_ok=True)
-    imgname = 'LC08_ROI_QZW_unit8'
+    imgname = '1'
     path = args.input + '/' + imgname + '.tif'
 
     print('PATH', path)
@@ -79,7 +79,7 @@ def main():
         # read image
     img = gdal.Open(path)
 
-    GF = gdal.Open('I:/redo/0427ROI/GF1C_ROI_QZW.tif')
+    GF = gdal.Open('Data/Mangroves/Paired_H_L_images/HR/1.tif')
     im_geotrans = GF.GetGeoTransform()
     im_proj = GF.GetProjection() 
 
