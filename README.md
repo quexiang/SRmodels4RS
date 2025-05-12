@@ -24,7 +24,7 @@ This project is about mangrove extraction based on the super-resolution (SR) rem
 
 - Add our pre-trained models `Src/experiments/train_SwinIR_SRx4_NIRRGB/models/net_g_latest.pth.py` to the folder  `experiments/train_SwinIR_SRx4_NIRRGB/models` of Real-ESRGAN.
 
-### pre-train model:
+### About pre-trained models:
 Since some pre-trained models were too large to be uploaded to GitHub, we created a Zenodo repo which can be accessed via: https://zenodo.org/records/15385164.
 
 ### Steps to generate training dataset:
