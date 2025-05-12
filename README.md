@@ -24,6 +24,29 @@ This project is about mangrove extraction based on the super-resolution (SR) rem
 
 - Add our pre-trained models `Src/experiments/train_SwinIR_SRx4_NIRRGB/models/net_g_latest.pth.py` to the folder  `experiments/train_SwinIR_SRx4_NIRRGB/models` of Real-ESRGAN.
 
+### pre-train model:
+Since some pre-trained models were too large to be uploaded to GitHub, we created a Zenodo repo which can be accessed via: https://zenodo.org/records/15385164.
+
+### Steps to generate training dataset:
+Setp1: Clip the percentile-based images:
+```bash
+   python Src/datapre/PercentClip.py 
+```
+Step2: Generate the paired high- and low- resolution images:
+```bash
+  python Src/datapre/data_generate.py
+```
+Step3: Assign the image indices for the training and testing datasets for models.
+```bash
+  python  Src/datapre/dataset_index.py
+```
+Step4: Set the image paths (metadata files) and then revised the “meta_info” field of the config file “train_realesrgan_x4plus.yml” for running different models.
+4.1 Excute "generate_metainfo.py"" (it will output a metadata file):
+```bash
+  python  Src/datapre/generate_metainfo.py
+```
+4.2 Setting the output path of the generated metadata file into the “meta_info” field of the “train_realesrgan_x4plus.yml” file.
+
 ### Usage:
 1. Models pre-training：
     ```bash
